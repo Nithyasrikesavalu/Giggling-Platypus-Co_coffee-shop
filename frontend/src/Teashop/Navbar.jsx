@@ -92,16 +92,16 @@ const Navbar = () => {
               <div className="flex items-center space-x-4 ml-4">
                 <div className="flex flex-col items-end">
                   <span className="text-[10px] text-[#ECB176] font-bold uppercase tracking-wider">Member</span>
-                  <span className={`text-sm font-semibold ${textColor}`}>{user.name.split(' ')[0]}</span>
+                  <span className={`text-sm font-semibold ${textColor}`}>{user.name ? user.name.split(' ')[0] : 'User'}</span>
                 </div>
                 <div className="group relative">
                   <div className="w-9 h-9 rounded-full bg-white/10 border border-white/20 flex items-center justify-center overflow-hidden cursor-pointer hover:border-[#ECB176] transition-colors">
-                    <span className="text-[#ECB176] font-bold">{user.name[0]}</span>
+                    <span className="text-[#ECB176] font-bold">{user.name ? user.name[0] : 'U'}</span>
                   </div>
                   <div className="absolute right-0 top-full mt-2 w-52 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                     <div className="px-4 py-3 border-b border-stone-100">
                       <p className="text-xs text-stone-400 font-medium">Signed in as</p>
-                      <p className="font-bold text-[#3C2A21] text-sm truncate">{user.name}</p>
+                      <p className="font-bold text-[#3C2A21] text-sm truncate">{user.name || 'User'}</p>
                     </div>
                     <button onClick={() => navigate('/orders')} className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-[#FAF3E0] hover:text-[#6F4E37] flex items-center gap-2">
                       <span>📋</span> My Orders
@@ -177,9 +177,9 @@ const Navbar = () => {
                 <div className="flex flex-col space-y-4">
                   <div className="flex items-center space-x-3">
                     <div className="w-12 h-12 rounded-full bg-[#ECB176] flex items-center justify-center text-[#3C2A21] font-bold text-xl">
-                      {user.name[0]}
+                      {user.name ? user.name[0] : 'U'}
                     </div>
-                    <span className="text-xl font-bold text-white">{user.name}</span>
+                    <span className="text-xl font-bold text-white">{user.name || 'User'}</span>
                   </div>
                   <button
                     onClick={() => { navigate('/orders'); setIsMenuOpen(false); }}
