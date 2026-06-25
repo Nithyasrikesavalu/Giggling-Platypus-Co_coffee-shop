@@ -2,7 +2,7 @@ import { useContext, useState, useEffect, useRef } from "react";
 import { CartContext } from "../context/CartContext";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api";
 import Navbar from "../Teashop/Navbar";
 import Footer from "../Teashop/footer";
 
@@ -73,7 +73,7 @@ const Cart = () => {
 
         let orderId = `ORD-${Date.now()}`;
         try {
-            const res = await axios.post("http://localhost:5000/api/orders", orderData, {
+            const res = await api.post('/api/orders', orderData, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             orderId = res.data?.data?.orderNumber || res.data?._id || orderId;

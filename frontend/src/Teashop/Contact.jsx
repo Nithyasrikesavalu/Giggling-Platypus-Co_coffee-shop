@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 
 // ── Success Popup ─────────────────────────────────────────────────────────────
 const SuccessPopup = ({ onClose }) => (
@@ -48,7 +48,7 @@ const Contact = () => {
 
     setLoading(true);
     try {
-      await axios.post('http://localhost:5000/api/contact', form);
+      await api.post('/api/contact', form);
       setForm({ name: '', email: '', subject: '', message: '' });
       setShowSuccess(true);
     } catch (err) {

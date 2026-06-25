@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import axios from "axios";
+import api from "../services/api";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../Teashop/Navbar";
@@ -19,7 +19,7 @@ const AdminDashboard = () => {
 
         const fetchOrders = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/api/orders");
+                const response = await api.get('/api/orders');
                 setOrders(response.data.data);
             } catch (error) {
                 console.error("Error fetching orders:", error);
@@ -33,7 +33,7 @@ const AdminDashboard = () => {
 
     const updateStatus = async (orderNumber, newStatus) => {
         try {
-            await axios.put(`http://localhost:5000/api/orders/${orderNumber}/status`, { status: newStatus });
+            await api.put(`/api/orders/${orderNumber}/status`, { status: newStatus });
             setOrders(orders.map(o => o.orderNumber === orderNumber ? { ...o, status: newStatus } : o));
         } catch (error) {
             alert("Error updating status");

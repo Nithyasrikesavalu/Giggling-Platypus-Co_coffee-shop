@@ -3,7 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import Navbar from "../Teashop/Navbar";
 import Footer from "../Teashop/footer";
-import axios from "axios";
+import api from "../services/api";
 
 // ── Status pipeline ──────────────────────────────────────────────────────────
 const STATUS_STEPS = [
@@ -116,7 +116,7 @@ const Orders = () => {
 
     const fetchOrders = useCallback(async () => {
         try {
-            const res = await axios.get("http://localhost:5000/api/orders", {
+            const res = await api.get('/api/orders', {
                 headers: { Authorization: `Bearer ${user?.token}` }
             });
             const all = res.data?.data || res.data || [];

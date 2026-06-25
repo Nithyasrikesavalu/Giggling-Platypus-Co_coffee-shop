@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 import { AuthContext } from './AuthContext';
 
 const OrderNotificationContext = createContext();
@@ -69,7 +69,7 @@ export const OrderNotificationProvider = ({ children }) => {
 
         const checkAndSimulate = async () => {
             try {
-                const res = await axios.get("http://localhost:5000/api/orders", {
+                const res = await api.get('/api/orders', {
                     headers: { Authorization: `Bearer ${user.token}` }
                 });
                 const all = res.data?.data || res.data || [];
@@ -95,7 +95,7 @@ export const OrderNotificationProvider = ({ children }) => {
                                 setTimeout(async () => {
                                     const nextStep = STATUS_STEPS[i];
                                     try {
-                                        await axios.put(`http://localhost:5000/api/orders/${orderId}/status`, { status: nextStep.key });
+                                        await api.put(`/api/orders/${orderId}/status`, { status: nextStep.key });
                                     } catch (e) { }
                                     addNotification(`Order #${orderId.slice(-6).toUpperCase()}: ${nextStep.label}`, nextStep.icon);
                                 }, delay);
